@@ -24,7 +24,8 @@ export default function WebcamVideo() {
   const detect = async (net: any) => {
     if (
       webcamRef.current &&
-      webcamRef.current.video?.readyState === 4
+      webcamRef.current.video?.readyState === 4 &&
+      canvasRef.current
     ) {
       const video = webcamRef.current.video;
       const videoWidth = webcamRef.current.video.videoWidth;
@@ -34,10 +35,8 @@ export default function WebcamVideo() {
       webcamRef.current.video.width = videoWidth;
       webcamRef.current.video.height = videoHeight;
 
-      if (canvasRef.current) {
-        canvasRef.current.width = videoWidth;
-        canvasRef.current.height = videoHeight;
-      }
+      canvasRef.current.width = videoWidth;
+      canvasRef.current.height = videoHeight;
 
       const hand = await net.estimateHands(video);
       console.log(hand);
@@ -54,8 +53,8 @@ export default function WebcamVideo() {
 
   return (
     <div>
-      <Webcam ref={webcamRef} className="w-[7rem]" />
-      <canvas ref={canvasRef} className="w-[7rem]" />
+      <Webcam ref={webcamRef} className="object-fill" />
+      <canvas ref={canvasRef} className="object-fill" />
     </div>
   );
 }

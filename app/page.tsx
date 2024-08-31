@@ -4,7 +4,7 @@ import WebcamVideo from './components/webcam'
 
 export default function Home() {
   return (
-    <div>
+    <div className='w-[90rem]'>
       <WebcamVideo />
     </div>
   )
