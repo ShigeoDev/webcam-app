@@ -17,7 +17,7 @@ export default function WebcamVideo() {
 
     setInterval(() => {
       detect(net);
-    }, 100)
+    }, 0)
 
   }
 
@@ -52,9 +52,9 @@ export default function WebcamVideo() {
   runHandpose();
 
   return (
-    <div>
-      <Webcam ref={webcamRef} className="object-fill" />
-      <canvas ref={canvasRef} className="object-fill" />
+    <div className="">
+      <Webcam ref={webcamRef} mirrored={true} className="absolute m-auto left-0 right-0 text-center w-full" />
+      <canvas ref={canvasRef} className="absolute m-auto left-0 right-0 text-center w-full scale-x-[-1]" />
     </div>
   );
 }
