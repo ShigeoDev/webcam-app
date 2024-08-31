@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import * as tf from "@tensorflow/tfjs"
 import * as handpose from "@tensorflow-models/handpose"
 import Webcam from "react-webcam"
+import { drawHand } from './utils/draw'
 
 export default function Home() {
   const webcamRef = useRef<Webcam>(null);
@@ -12,6 +13,10 @@ export default function Home() {
   const runHandpose = async () => {
     const net = await handpose.load();
     console.log('handpose');
+
+    setInterval(() => {
+      detect(net);
+    }, 100)
 
   }
 
@@ -35,6 +40,9 @@ export default function Home() {
 
       const hand = await net.estimateHands(video);
       console.log(hand);
+
+      const ctx = canvasRef.current?.getContext('2d');
+      drawHand(hand, ctx);
     }
 
 
